@@ -3,203 +3,227 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Clément Fabre | Interface Ingénieur</title>
+    <title>Clément Fabre | Automotive Engineering</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;900&family=Inter:wght@300;400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Exo+2:wght@300;700;900&family=Michroma&display=swap');
 
         :root {
-            --cyan-glow: #06b6d4;
+            --car-blue: #00d2ff;
+            --renault-yellow: #ffcc00; /* Touche subtile pour Renault */
         }
 
         body {
-            background-color: #020202;
-            color: #e2e8f0;
-            font-family: 'Inter', sans-serif;
-            overflow: hidden; /* Empêche le scroll pour garder l'aspect interface */
-        }
-
-        .font-tech { font-family: 'Orbitron', sans-serif; }
-
-        /* Animation du fond (Grid électronique) */
-        .bg-grid {
+            background-color: #080a0c;
+            color: #d1d5db;
+            font-family: 'Exo 2', sans-serif;
+            overflow: hidden;
             background-image: 
-                linear-gradient(to right, rgba(6, 182, 212, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(6, 182, 212, 0.05) 1px, transparent 1px);
-            background-size: 50px 50px;
+                radial-gradient(circle at 50% 50%, #1a1f25 0%, #080a0c 100%);
         }
 
-        /* Lueur cyan */
-        .glow-text { text-shadow: 0 0 15px rgba(6, 182, 212, 0.6); }
+        .font-auto { font-family: 'Michroma', sans-serif; }
 
-        /* Styles des boutons rubriques */
-        .nav-btn {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            filter: drop-shadow(0 0 0px transparent);
-        }
-        .nav-btn:hover {
-            filter: drop-shadow(0 0 10px var(--cyan-glow));
-            transform: scale(1.1);
+        /* Animation Scanline pour l'effet écran de diagnostic */
+        .scanline {
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 210, 255, 0.1);
+            position: absolute;
+            animation: scan 4s linear infinite;
+            z-index: 10;
         }
 
-        /* Overlay des pages */
-        #page-overlay {
-            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+
+        /* Boutons type "Tableau de bord" */
+        .dash-btn {
+            clip-path: polygon(10% 0%, 100% 0%, 90% 100%, 0% 100%);
+            transition: all 0.4s ease;
+            background: rgba(255, 255, 255, 0.03);
+            border-left: 4px solid var(--car-blue);
+        }
+
+        .dash-btn:hover {
+            background: rgba(0, 210, 255, 0.1);
+            transform: translateX(10px);
+            border-left: 4px solid var(--renault-yellow);
+        }
+
+        .glass-panel {
+            background: rgba(13, 17, 23, 0.8);
+            backdrop-blur: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
     </style>
 </head>
-<body class="bg-grid">
+<body>
+    <div class="scanline"></div>
 
-    <header class="fixed top-0 left-0 w-full p-6 flex justify-between items-center z-50">
-        <div class="font-tech text-xl tracking-tighter italic">
-            CLEMENT <span class="text-cyan-500 underline decoration-cyan-500/50 underline-offset-4">FABRE</span>
+    <header class="fixed top-0 w-full p-8 flex justify-between items-end z-50">
+        <div>
+            <h1 class="font-auto text-2xl tracking-tighter text-white">CF<span class="text-blue-400">.ENGINEERING</span></h1>
+            <p class="text-[10px] uppercase tracking-[0.4em] text-blue-500/70">Vehicle Systems & Power Electronics</p>
         </div>
-        <div class="flex items-center gap-3">
-            <span class="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-            <span class="text-[10px] font-mono text-gray-500 uppercase tracking-widest">System Online : S3E-2026</span>
+        <div class="text-right font-mono text-[10px]">
+            <p>LOCATION: RENAULT LARDY (TRESCAL)</p>
+            <p class="text-blue-400 italic">STATUS: CALIBRATING SYSTEM...</p>
         </div>
     </header>
 
-    <main id="main-hub" class="relative h-screen flex flex-col justify-center items-center transition-all duration-700">
+    <main id="main-interface" class="h-screen flex items-center justify-center p-6 transition-all duration-1000">
         
-        <div class="text-center mb-16">
-            <h2 class="font-tech text-gray-500 text-xs tracking-[0.5em] mb-2 uppercase">Core Interface</h2>
-            <div class="h-[1px] w-24 bg-cyan-500/30 mx-auto"></div>
-        </div>
-
-        <div class="relative w-72 h-72 md:w-96 md:h-96 flex items-center justify-center">
+        <div class="grid grid-cols-1 lg:grid-cols-3 w-full max-w-7xl items-center gap-12">
             
-            <div class="absolute inset-0 border border-cyan-500/20 rounded-full animate-[spin_20s_linear_infinite]"></div>
-            <div class="absolute inset-8 border border-dashed border-cyan-500/10 rounded-full animate-[spin_30s_linear_infinite_reverse]"></div>
-            
-            <div class="z-20 w-32 h-32 md:w-40 md:h-40 bg-[#0a0a0a] border-2 border-cyan-500 rounded-3xl flex items-center justify-center shadow-[0_0_50px_rgba(6,182,212,0.2)] group cursor-pointer overflow-hidden">
-                <div class="absolute inset-0 bg-cyan-500/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
-                <i class="fas fa-microchip text-5xl md:text-6xl text-cyan-500 group-hover:scale-110 transition-transform duration-500"></i>
+            <div class="space-y-6 z-20">
+                <button onclick="openTab('about')" class="dash-btn w-full p-6 flex flex-col items-start">
+                    <span class="text-[9px] text-blue-500 font-bold uppercase tracking-widest">01. Profile</span>
+                    <span class="font-auto text-sm text-white">IDENTITÉ</span>
+                </button>
+                <button onclick="openTab('career')" class="dash-btn w-full p-6 flex flex-col items-start">
+                    <span class="text-[9px] text-blue-500 font-bold uppercase tracking-widest">02. Experience</span>
+                    <span class="font-auto text-sm text-white">PARCOURS</span>
+                </button>
             </div>
 
-            <button onclick="openPage('parcours')" class="nav-btn absolute -top-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
-                <div class="w-16 h-16 bg-[#0f0f0f] border border-cyan-500/30 rounded-2xl flex items-center justify-center">
-                    <i class="fas fa-graduation-cap text-cyan-500"></i>
+            <div class="relative flex justify-center items-center">
+                <div class="absolute w-80 h-80 border-4 border-blue-500/20 rounded-full animate-pulse"></div>
+                <div class="absolute w-64 h-64 border border-dashed border-blue-400/30 rounded-full animate-[spin_20s_linear_infinite]"></div>
+                
+                <div class="z-10 text-center">
+                    <div class="text-5xl font-black text-white font-auto mb-2">S3E</div>
+                    <div class="text-blue-400 font-mono text-xs tracking-widest uppercase">Battery Test Systems</div>
                 </div>
-                <span class="text-[10px] font-tech mt-3 uppercase tracking-widest text-gray-400">Parcours</span>
-            </button>
 
-            <button onclick="openPage('projets')" class="nav-btn absolute top-1/2 -right-16 -translate-y-1/2 flex flex-col items-center">
-                <div class="w-16 h-16 bg-[#0f0f0f] border border-cyan-500/30 rounded-2xl flex items-center justify-center">
-                    <i class="fas fa-layer-group text-cyan-500"></i>
+                <div class="absolute top-0 right-0 p-4 border border-blue-500/20 glass-panel text-[10px]">
+                    VOLTAGE: NOMINAL<br>TEMP: 24.5°C
                 </div>
-                <span class="text-[10px] font-tech mt-3 uppercase tracking-widest text-gray-400">Projets</span>
-            </button>
+            </div>
 
-            <button onclick="openPage('skills')" class="nav-btn absolute top-1/2 -left-16 -translate-y-1/2 flex flex-col items-center">
-                <div class="w-16 h-16 bg-[#0f0f0f] border border-cyan-500/30 rounded-2xl flex items-center justify-center">
-                    <i class="fas fa-tools text-cyan-500"></i>
-                </div>
-                <span class="text-[10px] font-tech mt-3 uppercase tracking-widest text-gray-400">Skills</span>
-            </button>
+            <div class="space-y-6 z-20">
+                <button onclick="openTab('works')" class="dash-btn w-full p-6 flex flex-col items-start lg:items-end">
+                    <span class="text-[9px] text-blue-500 font-bold uppercase tracking-widest">03. Project Archive</span>
+                    <span class="font-auto text-sm text-white">RÉALISATIONS</span>
+                </button>
+                <button onclick="openTab('contact')" class="dash-btn w-full p-6 flex flex-col items-start lg:items-end">
+                    <span class="text-[9px] text-blue-500 font-bold uppercase tracking-widest">04. Transmission</span>
+                    <span class="font-auto text-sm text-white">CONTACT</span>
+                </button>
+            </div>
 
-            <button onclick="openPage('contact')" class="nav-btn absolute -bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center">
-                <div class="w-16 h-16 bg-[#0f0f0f] border border-cyan-500/30 rounded-2xl flex items-center justify-center">
-                    <i class="fas fa-satellite-dish text-cyan-500"></i>
-                </div>
-                <span class="text-[10px] font-tech mt-3 uppercase tracking-widest text-gray-400">Contact</span>
-            </button>
         </div>
     </main>
 
-    <div id="page-overlay" class="fixed inset-0 z-[100] hidden bg-black/95 backdrop-blur-2xl flex flex-col p-6 md:p-20 overflow-y-auto transform translate-y-full">
-        <button onclick="closePage()" class="absolute top-8 right-8 w-12 h-12 flex items-center justify-center bg-white/5 rounded-full hover:bg-cyan-500/20 hover:text-cyan-500 transition-all border border-white/10">
-            <i class="fas fa-times text-xl"></i>
+    <div id="content-overlay" class="fixed inset-0 z-[100] hidden bg-[#080a0c]/98 backdrop-blur-md p-6 md:p-20 overflow-y-auto transform translate-x-full transition-transform duration-500 ease-in-out">
+        <button onclick="closeTab()" class="absolute top-10 right-10 text-blue-400 hover:text-white transition group">
+            <span class="mr-2 text-[10px] font-auto opacity-0 group-hover:opacity-100 transition-opacity">CLOSE_UI</span>
+            <i class="fas fa-times text-2xl"></i>
         </button>
 
-        <div id="page-content" class="max-w-4xl mx-auto w-full py-10">
+        <div id="dynamic-content" class="max-w-5xl mx-auto">
             </div>
     </div>
 
     <script>
-        const contentData = {
-            parcours: `
-                <h2 class="font-tech text-4xl text-cyan-500 mb-12 glow-text uppercase">Expérience & Études</h2>
+        const content = {
+            about: `
+                <div class="grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <h2 class="font-auto text-3xl text-white mb-6 underline decoration-blue-500 decoration-4 underline-offset-8">PRÉSENTATION</h2>
+                        <p class="text-lg leading-relaxed text-gray-400">
+                            Étudiant ingénieur au <span class="text-blue-400">CESI S3E</span>, j'évolue au cœur des technologies de demain chez <span class="text-white">Renault</span>.
+                            Mon quotidien ? Concevoir, tester et valider les systèmes qui feront rouler les véhicules électriques.
+                        </p>
+                        <div class="mt-10 grid grid-cols-2 gap-4">
+                            <div class="p-4 border border-white/5 glass-panel">
+                                <p class="text-[10px] text-blue-500 mb-1">DISCIPLINE</p>
+                                <p class="text-sm font-bold">Systèmes Embarqués</p>
+                            </div>
+                            <div class="p-4 border border-white/5 glass-panel">
+                                <p class="text-[10px] text-blue-500 mb-1">SPECIALITÉ</p>
+                                <p class="text-sm font-bold">Power Electronics</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="bg-blue-500/5 p-8 border border-blue-500/20 rounded-xl italic text-sm text-gray-500">
+                        "Ma vision est de fusionner la rigueur de la métrologie avec l'innovation de l'ingénierie automobile."
+                    </div>
+                </div>
+            `,
+            career: `
+                <h2 class="font-auto text-3xl text-white mb-10">LOG DE CARRIÈRE</h2>
                 <div class="space-y-12">
-                    <div class="relative pl-8 border-l border-cyan-500/50">
-                        <div class="absolute -left-[5px] top-0 w-2 h-2 bg-cyan-500 rounded-full"></div>
-                        <h3 class="text-xl font-bold uppercase tracking-tight">Ingénieur d'Études S3E - Apprenti</h3>
-                        <p class="text-cyan-500 font-mono text-sm">Trescal / Renault Lardy • 2025 - 2028</p>
-                        <ul class="mt-4 text-gray-400 text-sm space-y-2 list-disc list-inside">
-                            <li>Étude des Power Electronic Blocks (PEB) véhicules électriques.</li>
-                            <li>Pilotage de bancs d'essai de cyclage batterie.</li>
-                            <li>Développement d'un bureau d'études régional.</li>
+                    <div class="p-6 border-l-2 border-blue-500 glass-panel">
+                        <div class="flex justify-between items-start mb-4">
+                            <h3 class="text-xl font-bold text-white uppercase">Ingénieur d'Études S3E</h3>
+                            <span class="text-blue-500 font-mono text-xs">2025 - 2028</span>
+                        </div>
+                        <p class="text-blue-400 mb-4 italic">Renault Lardy (via Trescal)</p>
+                        <ul class="text-sm text-gray-400 space-y-3">
+                            <li>• Analyse des PEB (Power Electronic Blocks) pour l'optimisation énergétique.</li>
+                            <li>• Modification et déploiement de bancs d'essai de cyclage batterie haute tension.</li>
+                            <li>• Support technique sur les infrastructures de tests électriques.</li>
                         </ul>
                     </div>
-                    <div class="relative pl-8 border-l border-white/10">
-                        <h3 class="text-xl font-bold uppercase tracking-tight text-gray-300">Technicien Métrologue</h3>
-                        <p class="text-gray-500 font-mono text-sm">Trescal Toulouse • 2023 - 2025</p>
-                        <p class="mt-2 text-gray-500 text-sm">Maintenance et calibration d'appareils de mesure haute précision.</p>
-                    </div>
                 </div>
             `,
-            projets: `
-                <h2 class="font-tech text-4xl text-cyan-500 mb-12 glow-text uppercase">Archive Projets</h2>
-                <div class="grid md:grid-cols-2 gap-6">
-                    <div class="p-6 bg-white/5 border border-white/10 rounded-2xl hover:border-cyan-500/50 transition">
-                        <div class="text-[10px] text-cyan-500 font-mono mb-2 uppercase">STM32 | C/C++</div>
-                        <h4 class="text-lg font-bold mb-3 uppercase">SmartCar Bluetooth</h4>
-                        <p class="text-xs text-gray-500">Conception complète d'un véhicule piloté à distance avec gestion de capteurs embarqués.</p>
+            works: `
+                <h2 class="font-auto text-3xl text-white mb-10">DOSSIERS TECHNIQUES</h2>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="group cursor-pointer">
+                        <div class="h-48 bg-blue-500/10 border border-white/5 rounded-t-xl mb-4 flex items-center justify-center group-hover:bg-blue-500/20 transition">
+                            <i class="fas fa-car-battery text-5xl text-blue-500"></i>
+                        </div>
+                        <h4 class="font-auto text-sm text-white uppercase">SmartCar Project</h4>
+                        <p class="text-xs text-gray-500 mt-2">Architecture STM32, contrôle Bluetooth et asservissement moteurs.</p>
                     </div>
-                    <div class="p-6 bg-white/5 border border-white/10 rounded-2xl hover:border-cyan-500/50 transition">
-                        <div class="text-[10px] text-cyan-500 font-mono mb-2 uppercase">Python | Acquisition</div>
-                        <h4 class="text-lg font-bold mb-3 uppercase">Module CSM Trescal</h4>
-                        <p class="text-xs text-gray-500">Automatisation de protocoles de vérification pour les modules d'acquisition.</p>
+                    <div class="group cursor-pointer">
+                        <div class="h-48 bg-blue-500/10 border border-white/5 rounded-t-xl mb-4 flex items-center justify-center group-hover:bg-blue-500/20 transition">
+                            <i class="fas fa-wave-square text-5xl text-blue-500"></i>
+                        </div>
+                        <h4 class="font-auto text-sm text-white uppercase">Capteur RF Liquides</h4>
+                        <p class="text-xs text-gray-500 mt-2">Identification de fluides par analyse spectrale de réflexion.</p>
                     </div>
-                </div>
-            `,
-            skills: `
-                <h2 class="font-tech text-4xl text-cyan-500 mb-12 glow-text uppercase">Stack Technique</h2>
-                <div class="flex flex-wrap gap-4">
-                    <div class="px-6 py-4 bg-[#111] border border-cyan-500/20 rounded-xl font-mono text-cyan-500 italic">C / C++</div>
-                    <div class="px-6 py-4 bg-[#111] border border-cyan-500/20 rounded-xl font-mono text-cyan-500 italic">Python</div>
-                    <div class="px-6 py-4 bg-[#111] border border-cyan-500/20 rounded-xl font-mono text-cyan-500 italic">Altium / KiCad</div>
-                    <div class="px-6 py-4 bg-[#111] border border-cyan-500/20 rounded-xl font-mono text-cyan-500 italic">Métrologie RF</div>
                 </div>
             `,
             contact: `
-                <h2 class="font-tech text-4xl text-cyan-500 mb-12 glow-text uppercase">Établir Connexion</h2>
-                <div class="bg-white/5 p-8 rounded-3xl border border-white/10 text-center">
-                    <p class="text-2xl font-bold mb-2">fabreclement498@gmail.com</p>
-                    <p class="text-gray-500 font-mono">ID: 06 34 31 05 22</p>
-                    <div class="mt-8 flex justify-center gap-6">
-                        <a href="#" class="text-3xl hover:text-cyan-500 transition"><i class="fab fa-linkedin"></i></a>
-                        <a href="#" class="text-3xl hover:text-cyan-500 transition"><i class="fab fa-github"></i></a>
+                <div class="text-center py-20">
+                    <h2 class="font-auto text-4xl text-white mb-6 uppercase">Ouvrir un canal</h2>
+                    <p class="text-blue-500 font-mono tracking-widest mb-12">fabreclement498@gmail.com</p>
+                    <div class="flex justify-center gap-10">
+                        <a href="#" class="text-gray-500 hover:text-white text-4xl transition-all hover:scale-125"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-gray-500 hover:text-white text-4xl transition-all hover:scale-125"><i class="fab fa-github"></i></a>
                     </div>
                 </div>
             `
         };
 
-        function openPage(id) {
-            const overlay = document.getElementById('page-overlay');
-            const content = document.getElementById('page-content');
-            const hub = document.getElementById('main-hub');
+        function openTab(id) {
+            const overlay = document.getElementById('content-overlay');
+            const contentDiv = document.getElementById('dynamic-content');
+            const main = document.getElementById('main-interface');
 
-            content.innerHTML = contentData[id];
+            contentDiv.innerHTML = content[id];
             overlay.classList.remove('hidden');
-            
             setTimeout(() => {
-                overlay.classList.remove('translate-y-full');
-                hub.classList.add('scale-75', 'opacity-20', 'blur-md');
+                overlay.classList.remove('translate-x-full');
+                main.classList.add('scale-95', 'opacity-0', 'blur-xl');
             }, 50);
         }
 
-        function closePage() {
-            const overlay = document.getElementById('page-overlay');
-            const hub = document.getElementById('main-hub');
+        function closeTab() {
+            const overlay = document.getElementById('content-overlay');
+            const main = document.getElementById('main-interface');
 
-            overlay.classList.add('translate-y-full');
-            hub.classList.remove('scale-75', 'opacity-20', 'blur-md');
-            
+            overlay.classList.add('translate-x-full');
+            main.classList.remove('scale-95', 'opacity-0', 'blur-xl');
             setTimeout(() => {
                 overlay.classList.add('hidden');
-            }, 600);
+            }, 500);
         }
     </script>
 </body>
